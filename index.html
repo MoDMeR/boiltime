@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Гланая страница</title>
+
+        <!-- Style -->
+        <link rel="stylesheet" type="text/css" href="style/style.css">
+        <link rel="stylesheet" type="text/css" href="style/materialize.min.css">
+        <link rel="stylesheet" type="text/css" href="style/font-awesome.min.css">
+        <!-- /Style -->
+
+        <!-- JS -->
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/underscore-min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/materialize.min.js"></script>
+        <script src="js/easytimer.min.js"></script>
+        <!-- /JS -->
+
+    </head>
+    <body>
+        <div class="preloader">
+            <div class="preloader__overlay"></div>
+            <div class="preloader__bg">
+                <div class="preloader-wrapper active">
+                    <div class="spinner-layer spinner-red-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="nav_bar"></div>
+        <div id="page"></div>
+        
+        <script type="text/template" id="nav_bar_tpl">
+            <nav>
+              <div class="nav-wrapper container">
+                <a href="#" class="brand-logo center"><%= pageName %></a>
+
+                <% if (leftMenu) { %>
+                    <ul class="left hide-on-med-and-down">
+                      <% _.each(a, function(l) { %>
+                        <li><a href="<%=l[0] %>"  class="waves-effect waves-light"><%=l[1] %></a></li>
+                      <% }); %>
+                    </ul>
+                <% } %>
+
+                <% if (rightMenu) { %>
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <button class="btn waves-effect waves-light red lighten-3 btn-floating no-shadow load_index">
+                                <i class="fa fa-home"></i>
+                            </button>
+                        </li>
+                    </ul>
+                <% } %>
+
+              </div>
+            </nav>
+        </script>
+
+        <script type="text/template" id="main_page_tpl">
+            <div class="container" id="main_page">
+                <div class="row">
+                    <div class="col s4">
+                        <div class="item">
+                            <a href="#" data-load="eggs">
+                                <img src="./img/eggs.png" class="itemImage" alt="">
+                                <div class="itemTitle">Яйца</div>
+                            </a>
+                        </div>    
+                    </div>
+                    <div class="col s4">
+                        <div class="item">
+                            <a href="#" data-load="pasta">
+                                <img src="./img/pasta.png" class="itemImage" alt="">
+                                <div class="itemTitle">Макароны</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col s4">
+                        <div class="item">
+                            <a href="#" data-load="rice">
+                                <img src="./img/rice.png" class="itemImage" alt="">
+                                <div class="itemTitle">Крупы</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <div class="item">
+                            <a href="#" data-load="veg">
+                                <img src="./img/vegetables.png" class="itemImage" alt="">
+                                <div class="itemTitle">Овощи</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col s4">
+                        <div class="item">
+                            <a href="#" data-load="other">
+                                <img src="./img/other.png" class="itemImage" alt="">
+                                <div class="itemTitle">Разное</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col s4">
+                        <div class="item">
+                            <a href="#" data-load="setting">
+                                <img src="./img/settings.png" class="itemImage" alt="">
+                                <div class="itemTitle">О программе</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                <a class="btn-floating btn-large red waves-effect waves-light modal-trigger" href="#add_content">
+                    +
+                </a>
+            </div>
+            <div id="add_content" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <h4>Конструктор</h4>
+                    <p> </p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Отправить</a>
+                </div>
+            </div>
+            -->
+        </script>
+
+        <script type="text/tempalte" id="list_tpl">
+            <div class="container">
+
+                <ul class="collection">
+                    <% _.each(items, function(l,i) { %>
+                        <li class="collection-item avatar" data-id="<%= l.ID %>">
+                            <i class="circle"><%= l.title.substring(0,1) %></i>
+                            <span class="title"><%= l.title %></span>
+                            <p></p>
+                        </li>
+                    <% }); %>
+                </ul>
+
+            </div>
+        </script>
+        
+        <script type="text/template" id="detail_tpl">
+            <div class="container">
+                <div class="card detail" id="detail">
+                    <!--<div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="http://materializecss.com/images/office.jpg">
+                        <span class="card-title"><%= title %></span>
+                    </div>-->
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">
+                            <%= title %> <!--<i class="fa fa-ellipsis-v right"></i>-->
+                        </span>
+                        
+                        <%= content %>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= title %><i class="fa fa-times right"></i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="setting_page_tpl">
+            <div class="container">
+                <h3>О программе</h3>
+                <div class="card-panel thin-text">
+                    Сколько варить яйца или картошку? Мы подскажем и вовремя напомним, что пора бежать и снимать пельмени, пока они не убежали.
+                    <br> <br>
+                    Поддержка: <a href="mailto:info@скольковарить.рф">info@скольковарить.рф</a>
+                </div>
+                <h3>Changelog</h3>
+                <div class="card-panel thin-text">
+                    <ul class="changelog">
+                        <li>
+                            V 1.0.1 <br />
+                            <span>&ndash; Небольшие исправления и улучшения.</span> <br />
+                        </li>
+                        <li>
+                            V 1.0.0 <br />
+                            <span>&ndash; Полностью обновленное приложение.</span> <br />
+                            <span>&ndash; Новый дизайн.</span> <br />
+                            <span>&ndash; Улучшена работа таймера.</span> <br />
+                            <span>&ndash; Таймер работает в фоном режиме.</span> <br />
+                        </li>
+                        <li>
+                            V 0.1.2 <br>
+                            <span>&ndash; Добавлена навигация по приложению "назад" (1 шаг назад) и "домой" (на главную страницу приложения).</span> <br>
+                            <span>&ndash; В раздел "макароны" добавлен пункт "лапша".</span>
+                        </li>
+                        <li>
+                            V 0.1.1 <br>
+                            <span>&ndash; Добавлена страница приветствия.</span>
+                        </li>
+                        <li>
+                            V 0.1 <br>
+                            <span>&ndash; Релиз.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </script>
+
+    </body>
+</html>

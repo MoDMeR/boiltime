@@ -1,0 +1,25 @@
+{
+    "app": {
+      "launch": {
+         "local_path": "index.html"
+      }
+    },
+    "description": "Сколько варить яйца или картошку? Мы Вам подскажем.",
+    "icons": {
+      "128": "img/icons/128.png",
+      "48": "img/icons/48.png",
+      "16": "img/icons/16.png"
+    },
+    "background": {
+      "scripts": ["js/jquery-2.1.4.min.js", "js/easytimer.min.js", "js/ion.sound.js", "js/background.js"]
+    },
+    "permissions": [
+        "http://*.скольковарить.рф/"
+    ],
+   "name": "Сколько варить",
+   "version": "1.0.1",
+   "manifest_version": 2,
+   "offline_enabled": true,
+   "permissions": [ "notifications" ],
+   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}
