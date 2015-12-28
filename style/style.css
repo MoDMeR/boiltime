@@ -206,3 +206,8 @@ body {
   width: 108px;
   height: 80px;
 }
+@media (max-width: 470px) {
+  .detail .step .stepInner .stepText {
+    width: 140px!important;
+  }
+}
